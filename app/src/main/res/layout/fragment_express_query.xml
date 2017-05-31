@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal"
+    android:padding="25dp">
+
+    <EditText
+        android:id="@+id/express_num_ET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.dd.CircularProgressButton
+        android:id="@+id/query_submit_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/cpb_white"
+        app:cpb_textIdle="@string/query" />
+
+</LinearLayout>
