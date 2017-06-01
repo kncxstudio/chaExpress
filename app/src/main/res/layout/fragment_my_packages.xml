@@ -13,8 +13,8 @@
         app:tabTextColor="@color/WHITE"
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabMode="fixed"/>
-    <FrameLayout
-        android:id="@+id/my_packages_FrameLayout"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/my_packages_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

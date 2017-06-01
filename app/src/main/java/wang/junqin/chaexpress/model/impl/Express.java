@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -15,7 +14,7 @@ import wang.junqin.chaexpress.model.IExpress;
 import wang.junqin.chaexpress.model.bean.ExpressComBean;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
 import wang.junqin.chaexpress.net.NetWork;
-import wang.junqin.chaexpress.net.NetWorkImpl;
+import wang.junqin.chaexpress.net.impl.NetWorkImpl;
 import wang.junqin.chaexpress.presenter.QueryListener;
 
 /**

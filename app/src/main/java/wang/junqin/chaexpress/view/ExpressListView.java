@@ -9,5 +9,5 @@ public interface ExpressListView {
 
     void showItemDetails();
 
-    void longPressed();
+    void onItemLongPressed();
 }

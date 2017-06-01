@@ -3,6 +3,7 @@ package wang.junqin.chaexpress;
 import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.pm.PackageInfo;
 
 import java.security.PublicKey;
 
@@ -27,5 +28,6 @@ public class ExpressApplication extends Application {
 
     public static Context getContext(){
         return context;
+
     }
 }
