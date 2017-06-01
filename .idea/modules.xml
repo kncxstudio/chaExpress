@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ChaExpress.iml" filepath="$PROJECT_DIR$/ChaExpress.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chaExpress.iml" filepath="$PROJECT_DIR$/chaExpress.iml" />
     </modules>
   </component>
 </project>
