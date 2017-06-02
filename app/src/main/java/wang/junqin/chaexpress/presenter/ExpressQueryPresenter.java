@@ -63,7 +63,9 @@ public class ExpressQueryPresenter {
 
             @Override
             public void onSuccess(ExpressInfoBean expressInfoBean) {
-                MyUtils.showToast(new Gson().toJson(expressInfoBean));
+                express.saveExpressInfo(expressInfoBean);
+                MyUtils.showToast("添加快递成功!");
+                view.queryComplete();
             }
 
             @Override

@@ -2,11 +2,11 @@ package wang.junqin.chaexpress;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.pm.PackageInfo;
 
-import java.security.PublicKey;
+import com.objectbox.gen.MyObjectBox;
 
+import io.objectbox.BoxStore;
+import wang.junqin.chaexpress.DAO.DAOUtils;
 import wang.junqin.chaexpress.data.ComCodeNameMap;
 import wang.junqin.chaexpress.utils.MyUtils;
 
@@ -24,6 +24,7 @@ public class ExpressApplication extends Application {
         context = getApplicationContext();
         ComCodeNameMap.init();
         MyUtils.initMyUtils(context);
+        DAOUtils.init(context);
     }
 
     public static Context getContext(){

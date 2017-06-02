@@ -75,6 +75,5 @@ public class ChooseComDialogFragment extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         Log.e("Dialog","Dialog关闭");
-        view.queryComplete();
     }
 }

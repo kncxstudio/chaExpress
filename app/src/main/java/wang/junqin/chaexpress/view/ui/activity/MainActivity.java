@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_query:
                     Log.e(TAG, "nav_query");
-                    fragmentTransaction.show(queryFragment);
                     fragmentTransaction.hide(myPackagesFragment);
+                    fragmentTransaction.show(queryFragment);
                     break;
                 case R.id.navigation_my_packages:
                     Log.e(TAG, "nav_packages");
-                    fragmentTransaction.show(myPackagesFragment);
                     fragmentTransaction.hide(queryFragment);
+                    fragmentTransaction.show(myPackagesFragment);
+                    myPackagesFragment.refreshChild();
                     break;
             }
             fragmentTransaction.commit();
@@ -66,12 +67,17 @@ public class MainActivity extends AppCompatActivity {
         myPackagesFragment = new MyPackagesFragment();
 
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.add(R.id.content, queryFragment);
-        fragmentTransaction.add(R.id.content, myPackagesFragment);
-
+        fragmentTransaction.add(R.id.content,queryFragment,"query_packages");
+        fragmentTransaction.add(R.id.content,myPackagesFragment,"my_packages");
         fragmentTransaction.hide(myPackagesFragment);
-
         fragmentTransaction.commit();
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 

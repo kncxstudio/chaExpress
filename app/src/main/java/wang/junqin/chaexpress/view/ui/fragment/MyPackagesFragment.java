@@ -34,16 +34,21 @@ public class MyPackagesFragment extends Fragment {
     ExpressPagerAdapter pagerAdapter;
     List<Fragment> fragmentList;
     ArrayList<String> titleList = new ArrayList<>();
+
+    NotCheckedFragment notCheckedFragment;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_my_packages,container,false);
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         tabLayout = (TabLayout) view.findViewById(R.id.my_packages_tablayout);
         viewPager = (ViewPager) view.findViewById(R.id.my_packages_viewpager);
+        super.onResume();
 
         titleList.add("在运包裹");
         titleList.add("已签收包裹");
@@ -53,7 +58,7 @@ public class MyPackagesFragment extends Fragment {
 
         fragmentManager = getFragmentManager();
         fragmentList = new ArrayList<>();
-        fragmentList.add(new QueryFragment());
+        fragmentList.add(notCheckedFragment = new NotCheckedFragment());
         fragmentList.add(new QueryFragment());
         pagerAdapter = ExpressPagerAdapter.newInstance(fragmentManager,fragmentList);
 
@@ -93,7 +98,12 @@ public class MyPackagesFragment extends Fragment {
 
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(0);
+
     }
 
+
+    public void refreshChild(){
+        notCheckedFragment.setUserVisibleHint(true);
+    }
 
 }

@@ -1,5 +1,6 @@
 package wang.junqin.chaexpress.model;
 
+import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
 import wang.junqin.chaexpress.presenter.QueryListener;
 
 /**
@@ -9,6 +10,7 @@ import wang.junqin.chaexpress.presenter.QueryListener;
 public interface IExpress {
     public void queryExpCom(String expNum,QueryListener listener);
     public void queryExpInfo(String expNum, String com, QueryListener listener);
+    public void saveExpressInfo(ExpressInfoBean expressInfoBean);
 
 }
 

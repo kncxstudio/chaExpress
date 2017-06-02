@@ -16,7 +16,7 @@ public class ExpressInfoBean {
     private String state;
     private List<Data> data;
 
-    class Data{
+    public class Data{
         private String time;
         private String ftime;
         private String context;

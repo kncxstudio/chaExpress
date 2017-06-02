@@ -1,15 +1,26 @@
 package wang.junqin.chaexpress.model.impl;
 
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import io.objectbox.Box;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import wang.junqin.chaexpress.DAO.DAOUtils;
+import wang.junqin.chaexpress.DAO.ExpressEntity;
 import wang.junqin.chaexpress.model.IExpress;
 import wang.junqin.chaexpress.model.bean.ExpressComBean;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
@@ -98,5 +109,23 @@ public class Express implements IExpress {
 
                     }
                 });
+    }
+
+    @Override
+    public void saveExpressInfo(ExpressInfoBean expressInfoBean) {
+
+        Box<ExpressEntity> expressEntityBox = DAOUtils.getClassBox(ExpressEntity.class);
+
+        ExpressEntity entity = new ExpressEntity(0
+                ,expressInfoBean.getNu()
+                ,expressInfoBean.getCom()
+                ,new Gson().toJson(expressInfoBean.getData())
+                ,System.currentTimeMillis()
+                ,"not_checked"
+                ,null
+        );
+
+        expressEntityBox.put(entity);
+
     }
 }

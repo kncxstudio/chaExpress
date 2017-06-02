@@ -1,0 +1,53 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "2:1444446689710488595",
+      "lastPropertyId": "7:1894015372592585238",
+      "name": "ExpressEntity",
+      "properties": [
+        {
+          "id": "1:7608240985530062408",
+          "name": "id"
+        },
+        {
+          "id": "2:4065819676012617129",
+          "name": "expNum"
+        },
+        {
+          "id": "3:995981345429616396",
+          "name": "expCom"
+        },
+        {
+          "id": "4:7931218903606250818",
+          "name": "expInfo"
+        },
+        {
+          "id": "5:1470054264242491406",
+          "name": "dateAdded"
+        },
+        {
+          "id": "7:1894015372592585238",
+          "name": "status"
+        }
+      ]
+    }
+  ],
+  "lastEntityId": "2:1444446689710488595",
+  "lastIndexId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 2,
+  "retiredEntityUids": [
+    7651526718597860823
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    8554922825299449116,
+    56166089567501962,
+    3144960281404668301,
+    9206737175409753489
+  ],
+  "version": 1
+}

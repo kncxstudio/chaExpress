@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ExpressPagerAdapter extends FragmentPagerAdapter {
 
-    FragmentManager fragmentManager;
     List<Fragment> fragmentList;
 
     public ExpressPagerAdapter(FragmentManager fm) {
@@ -22,7 +21,6 @@ public class ExpressPagerAdapter extends FragmentPagerAdapter {
 
     public static ExpressPagerAdapter newInstance(FragmentManager fm,List<Fragment> fragmentList){
         ExpressPagerAdapter adapter = new ExpressPagerAdapter(fm);
-        adapter.fragmentManager = fm;
         adapter.fragmentList = fragmentList;
         return adapter;
     }
@@ -36,5 +34,10 @@ public class ExpressPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragmentList.size();
+    }
+
+    public void removeAllPages(){
+        fragmentList.clear();
+        notifyDataSetChanged();
     }
 }
