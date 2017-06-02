@@ -1,0 +1,7 @@
+<resources>
+    <!--在这个文件中添加同样名字的item就能正确显示BottomNavigationBar中的Vector图标-->
+    <!--即使指向的图标并不是Vector图标仍能正确显示原本的Vector图标？不了解原因-->
+    <item name="ic_packages" type="drawable">@android:drawable/ic_menu_agenda</item>
+    <item name="ic_search" type="drawable">@android:drawable/ic_menu_search</item>
+
+</resources>
