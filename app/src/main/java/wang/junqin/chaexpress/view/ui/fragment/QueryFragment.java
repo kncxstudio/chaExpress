@@ -63,8 +63,8 @@ public class QueryFragment extends Fragment implements QueryExpressByNumView {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
-            case FLAGS.RETURN_COM_CODE:
-                String comCode = data.getStringExtra("comCode");
+            case FLAGS.DIALOG_RETURN_CODE:
+                String comCode = data.getStringExtra("item");
                 if (comCode != null) {
                     presenter.queryExpInfo(comCode);
                 }else {
@@ -140,11 +140,12 @@ public class QueryFragment extends Fragment implements QueryExpressByNumView {
         ArrayList<String> comCodeList = new ArrayList<>();
         for (ExpressComBean com : comList) comCodeList.add(com.getComCode());
 
-        ChooseComDialogFragment dialogFragment = ChooseComDialogFragment.newInstance(this);
+        ChooseDialogFragment dialogFragment = ChooseDialogFragment.newInstance();
         Bundle data = new Bundle();
         data.putStringArrayList("data",comCodeList);
+        data.putString("title",FLAGS.CHOOSE_EXPRESS_COMPANY);
         dialogFragment.setArguments(data);
         dialogFragment.setTargetFragment(this,1);
-        dialogFragment.show(getFragmentManager(),"comChooseDialog");
+        dialogFragment.show(getFragmentManager(),"ChooseDialog");
     }
 }

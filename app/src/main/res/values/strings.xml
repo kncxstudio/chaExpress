@@ -4,4 +4,5 @@
     <string name="my_package">我的包裹</string>
     <string name="query">查询</string>
     <string name="not_checked">未签收</string>
+    <string name="on_the_way">运输中</string>
 </resources>

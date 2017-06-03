@@ -6,7 +6,7 @@
     <color name="WHITE">#ffffff</color>
     <color name="BLACK">#000000</color>
     <color name="is_ckecked">#31d452</color>
-    <color name="not_ckecked">#1d689b</color>
+    <color name="not_ckecked">#247dba</color>
     <color name="GREY">#8c8b8b</color>
 
 </resources>

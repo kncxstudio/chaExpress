@@ -1,7 +1,7 @@
 package wang.junqin.chaexpress.view.ui.fragment;
 
-import android.content.Context;
-import android.content.pm.ProviderInfo;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,25 +10,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.reflect.TypeToken;
-import com.objectbox.gen.ExpressEntity_;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import io.objectbox.annotation.Entity;
-import io.objectbox.query.Query;
 import wang.junqin.chaexpress.DAO.DAOUtils;
 import wang.junqin.chaexpress.DAO.ExpressEntity;
 import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.adapter.ExpressItemAdapter;
 import wang.junqin.chaexpress.adapter.RecyclerViewItemClickListener;
-import wang.junqin.chaexpress.model.impl.Express;
+import wang.junqin.chaexpress.data.ACTION_FLAGS;
+import wang.junqin.chaexpress.data.FLAGS;
 import wang.junqin.chaexpress.presenter.ExpressListPresenter;
+import wang.junqin.chaexpress.utils.MyUtils;
 import wang.junqin.chaexpress.view.ExpressListView;
 
 /**
@@ -44,7 +39,7 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
     ExpressItemAdapter adapter;
     ExpressListPresenter presenter = new ExpressListPresenter(this);
-
+    ExpressEntity selectedEntity = null;
     public int PACKAGES_MODE = 0;
     @Nullable
     @Override
@@ -58,11 +53,31 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
         layout = (SwipeRefreshLayout) view.findViewById(R.id.viewpager_not_checked_swiperefreshlayout);
         recyclerView = (RecyclerView) view.findViewById(R.id.viewpager_not_checked_recyclerview);
         recyclerView.setLayoutManager(linearLayoutManager);
-
         presenter.refreshList(PACKAGES_MODE);
 
     }
 
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == FLAGS.DIALOG_RETURN_CODE){
+            if (data.getStringExtra("item") != null) {
+                String action = data.getStringExtra("item");
+                switch (action) {
+                    case ACTION_FLAGS.DELETE_ITEM:
+                        presenter.deleteExpressInfo(selectedEntity);
+                        break;
+                    case ACTION_FLAGS.CHANGE_STATUS_TO_IS_CHECKED:
+                        presenter.editExpressInfo(selectedEntity);
+                        break;
+                    case ACTION_FLAGS.SHARE_TO_FRIENDS:
+
+                        break;
+                }
+            }
+        }
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -92,6 +107,11 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
     }
 
     @Override
+    public int getViewPackagesMode() {
+        return PACKAGES_MODE;
+    }
+
+    @Override
     public void refreshList(List<ExpressEntity> list) {
         if (adapter != null) {
             adapter.removeAll();
@@ -101,7 +121,6 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
         }
 
 
-        Log.e(TAG," list size == " + list.size());
         if (recyclerView.getAdapter() == null){
             recyclerView.setAdapter(adapter);
             adapter.setOnItemClickListener(new RecyclerViewItemClickListener() {
@@ -113,10 +132,23 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
 
                 @Override
                 public void onItemLongClick(View view) {
+                    //获取到长按item所对应的entity
+                    selectedEntity = (ExpressEntity) view.getTag();
 
-                    ExpressEntity entity = (ExpressEntity) view.getTag();
-                    entity.setStatus("is_checked");
-                    DAOUtils.getClassBox(ExpressEntity.class).put(entity);
+                    ArrayList<String> actionList = new ArrayList<>();
+                    switch (PACKAGES_MODE){
+                        case ExpressListPresenter.IS_CHECKED_PACKAGES:
+                            actionList.add(ACTION_FLAGS.SHARE_TO_FRIENDS);
+                            actionList.add(ACTION_FLAGS.DELETE_ITEM);
+                            break;
+                        case ExpressListPresenter.NOT_CHECKED_PACKAGES:
+                            actionList.add(ACTION_FLAGS.CHANGE_STATUS_TO_IS_CHECKED);
+                            actionList.add(ACTION_FLAGS.SHARE_TO_FRIENDS);
+                            actionList.add(ACTION_FLAGS.DELETE_ITEM);
+                            break;
+                    }
+
+                    showLongPressedActionChooseDialog(actionList);
                 }
             });
         }else {
@@ -135,6 +167,21 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
 
     }
 
+    @Override
+    public void showLongPressedActionChooseDialog(ArrayList<String> actionList) {
+        ChooseDialogFragment dialogFragment = ChooseDialogFragment.newInstance();
+        Bundle data = new Bundle();
+        data.putStringArrayList("data",actionList);
+        data.putString("title",FLAGS.CHOOSE_EXPRESS_ITEM_ACTION);
+        dialogFragment.setArguments(data);
+        dialogFragment.setTargetFragment(this,1);
+        dialogFragment.show(getFragmentManager(),"ChooseDialog");
+    }
+
+    @Override
+    public void showToast(String str) {
+        MyUtils.showToast(str);
+    }
 
 
     public static ExpressListFragment newInstance(int mode){

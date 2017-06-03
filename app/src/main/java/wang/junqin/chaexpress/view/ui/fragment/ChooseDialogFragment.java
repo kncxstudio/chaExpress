@@ -25,45 +25,52 @@ import wang.junqin.chaexpress.view.QueryExpressByNumView;
  * Created by KN on 2017/5/30.
  */
 
-public class ChooseComDialogFragment extends DialogFragment {
+public class ChooseDialogFragment extends DialogFragment {
     ListView listView;
-    QueryExpressByNumView view;
     Intent intent = new Intent();
+    String title;
 
 
-
-
-    public static ChooseComDialogFragment newInstance(QueryExpressByNumView view){
-        ChooseComDialogFragment chooseComDialogFragment = new ChooseComDialogFragment();
-        chooseComDialogFragment.view = view;
-        return chooseComDialogFragment;
+    public static ChooseDialogFragment newInstance(){
+        return new ChooseDialogFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choose_exp_com_dialog,container,false);
-        getDialog().setTitle("请选择快递公司");
+        getDialog().setTitle(title = getArguments().getString("title"));
         listView = (ListView) view.findViewById(R.id.choose_com_dialog_listview);
         listView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        final ArrayList<String> comCodeList = getArguments().getStringArrayList("data");
+        final ArrayList<String> itemList = getArguments().getStringArrayList("data");
 
         ArrayList<String> comNameList = new ArrayList<>();
+        final ListAdapter adapter;
 
-        for (String code : comCodeList)
-            comNameList.add(ComCodeNameMap.getComNameByCode(code));
-        final ListAdapter adapter = new ArrayAdapter<>(ExpressApplication.getContext(),android.R.layout.simple_list_item_1,comNameList);
+        switch (title){
+            case FLAGS.CHOOSE_EXPRESS_COMPANY:
+                for (String code : itemList)
+                    comNameList.add(ComCodeNameMap.getComNameByCode(code));
+                adapter = new ArrayAdapter<>(ExpressApplication.getContext(),android.R.layout.simple_list_item_1,comNameList);
+                listView.setAdapter(adapter);
+                break;
+            case FLAGS.CHOOSE_EXPRESS_ITEM_ACTION:
+                adapter = new ArrayAdapter<>(ExpressApplication.getContext(),android.R.layout.simple_list_item_1,itemList);
+                listView.setAdapter(adapter);
+                break;
+        }
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Dialog","Position" + position);
-                intent.putExtra("comCode",comCodeList.get(position));
+                intent.putExtra("item",itemList.get(position));
                 dismiss();
             }
         });
 
-        listView.setAdapter(adapter);
+
         return view;
 
     }
@@ -72,7 +79,7 @@ public class ChooseComDialogFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getTargetFragment().onActivityResult(1, FLAGS.RETURN_COM_CODE,intent);
+        getTargetFragment().onActivityResult(1, FLAGS.DIALOG_RETURN_CODE,intent);
         Log.e("Dialog","Dialog关闭");
 
     }

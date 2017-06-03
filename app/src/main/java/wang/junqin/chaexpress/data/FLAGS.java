@@ -7,5 +7,11 @@ import java.security.PublicKey;
  */
 
 public class FLAGS {
-    public final static int RETURN_COM_CODE = 1;
+    //Dialog return code
+    public final static int DIALOG_RETURN_CODE = 1;
+
+
+    //用于Dialog判断要执行的逻辑
+    public final static String CHOOSE_EXPRESS_COMPANY = "请选择快递公司";
+    public final static String CHOOSE_EXPRESS_ITEM_ACTION = "请选择操作";
 }

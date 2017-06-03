@@ -3,6 +3,7 @@ package wang.junqin.chaexpress.view;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import wang.junqin.chaexpress.DAO.ExpressEntity;
@@ -20,9 +21,14 @@ public interface ExpressListView {
 
     ExpressItemAdapter getItemAdapter();
 
+    int getViewPackagesMode();
     void refreshList(List<ExpressEntity> list);
 
     void showItemDetails();
 
     void onItemLongPressed();
+
+    void showLongPressedActionChooseDialog(ArrayList<String> actionList);
+    void showToast(String str);
+
 }
