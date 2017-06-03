@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,11 +20,13 @@ import com.objectbox.gen.ExpressEntity_;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.objectbox.annotation.Entity;
 import io.objectbox.query.Query;
 import wang.junqin.chaexpress.DAO.DAOUtils;
 import wang.junqin.chaexpress.DAO.ExpressEntity;
 import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.adapter.ExpressItemAdapter;
+import wang.junqin.chaexpress.adapter.RecyclerViewItemClickListener;
 import wang.junqin.chaexpress.model.impl.Express;
 import wang.junqin.chaexpress.presenter.ExpressListPresenter;
 import wang.junqin.chaexpress.view.ExpressListView;
@@ -32,15 +35,17 @@ import wang.junqin.chaexpress.view.ExpressListView;
  * Created by KN on 2017/6/2.
  */
 
-public class NotCheckedFragment extends Fragment implements ExpressListView {
+public class ExpressListFragment extends Fragment implements ExpressListView {
 
-    private String TAG = "NotCheckedFragment";
+    private String TAG = "ExpressListFragment";
 
     SwipeRefreshLayout layout;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
     ExpressItemAdapter adapter;
     ExpressListPresenter presenter = new ExpressListPresenter(this);
+
+    public int PACKAGES_MODE = 0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,7 +58,9 @@ public class NotCheckedFragment extends Fragment implements ExpressListView {
         layout = (SwipeRefreshLayout) view.findViewById(R.id.viewpager_not_checked_swiperefreshlayout);
         recyclerView = (RecyclerView) view.findViewById(R.id.viewpager_not_checked_recyclerview);
         recyclerView.setLayoutManager(linearLayoutManager);
-        presenter.refreshList(ExpressListPresenter.ALL_PACKAGES);
+
+        presenter.refreshList(PACKAGES_MODE);
+
     }
 
 
@@ -64,15 +71,10 @@ public class NotCheckedFragment extends Fragment implements ExpressListView {
         getUserVisibleHint();
         if (recyclerView == null) return;
         if (isVisibleToUser)
-            presenter.refreshList(ExpressListPresenter.ALL_PACKAGES);
+            presenter.refreshList(PACKAGES_MODE);
 
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.e(TAG,"onAttach");
-    }
 
     @Override
     public RecyclerView getRecyclerView() {
@@ -102,6 +104,21 @@ public class NotCheckedFragment extends Fragment implements ExpressListView {
         Log.e(TAG," list size == " + list.size());
         if (recyclerView.getAdapter() == null){
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener(new RecyclerViewItemClickListener() {
+                @Override
+                public void onItemClick(View view) {
+                    ExpressEntity entity = (ExpressEntity) view.getTag();
+                    Log.e(TAG,entity.getExpNum());
+                }
+
+                @Override
+                public void onItemLongClick(View view) {
+
+                    ExpressEntity entity = (ExpressEntity) view.getTag();
+                    entity.setStatus("is_checked");
+                    DAOUtils.getClassBox(ExpressEntity.class).put(entity);
+                }
+            });
         }else {
             adapter.notifyDataSetChanged();
         }
@@ -116,6 +133,14 @@ public class NotCheckedFragment extends Fragment implements ExpressListView {
     @Override
     public void onItemLongPressed() {
 
+    }
+
+
+
+    public static ExpressListFragment newInstance(int mode){
+        ExpressListFragment fragment = new ExpressListFragment();
+        fragment.PACKAGES_MODE = mode;
+        return fragment;
     }
 
 

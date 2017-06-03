@@ -65,7 +65,11 @@ public class QueryFragment extends Fragment implements QueryExpressByNumView {
         switch (requestCode){
             case FLAGS.RETURN_COM_CODE:
                 String comCode = data.getStringExtra("comCode");
-                presenter.queryExpInfo(comCode);
+                if (comCode != null) {
+                    presenter.queryExpInfo(comCode);
+                }else {
+                    queryComplete();
+                }
                 break;
         }
     }

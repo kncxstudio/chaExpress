@@ -71,6 +71,7 @@ public class ExpressQueryPresenter {
             @Override
             public void onError(@Nullable String str) {
                 MyUtils.showToast(str);
+                view.queryComplete();
             }
         });
     }

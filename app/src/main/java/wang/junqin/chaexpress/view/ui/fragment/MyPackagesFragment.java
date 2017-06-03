@@ -2,15 +2,10 @@ package wang.junqin.chaexpress.view.ui.fragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +15,7 @@ import java.util.List;
 
 import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.adapter.ExpressPagerAdapter;
-import wang.junqin.chaexpress.view.ExpressListView;
+import wang.junqin.chaexpress.presenter.ExpressListPresenter;
 
 /**
  * Created by KN on 2017/5/30.
@@ -35,7 +30,7 @@ public class MyPackagesFragment extends Fragment {
     List<Fragment> fragmentList;
     ArrayList<String> titleList = new ArrayList<>();
 
-    NotCheckedFragment notCheckedFragment;
+    ExpressListFragment notCheckedFragment,isCheckedFragment;
 
     @Nullable
     @Override
@@ -58,8 +53,8 @@ public class MyPackagesFragment extends Fragment {
 
         fragmentManager = getFragmentManager();
         fragmentList = new ArrayList<>();
-        fragmentList.add(notCheckedFragment = new NotCheckedFragment());
-        fragmentList.add(new QueryFragment());
+        fragmentList.add(notCheckedFragment = ExpressListFragment.newInstance(ExpressListPresenter.NOT_CHECKED_PACKAGES));
+        fragmentList.add(isCheckedFragment = ExpressListFragment.newInstance(ExpressListPresenter.IS_CHECKED_PACKAGES));
         pagerAdapter = ExpressPagerAdapter.newInstance(fragmentManager,fragmentList);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -104,6 +99,8 @@ public class MyPackagesFragment extends Fragment {
 
     public void refreshChild(){
         notCheckedFragment.setUserVisibleHint(true);
+        isCheckedFragment.setUserVisibleHint(true);
+
     }
 
 }

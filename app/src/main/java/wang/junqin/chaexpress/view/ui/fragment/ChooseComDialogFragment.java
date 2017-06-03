@@ -28,7 +28,7 @@ import wang.junqin.chaexpress.view.QueryExpressByNumView;
 public class ChooseComDialogFragment extends DialogFragment {
     ListView listView;
     QueryExpressByNumView view;
-
+    Intent intent = new Intent();
 
 
 
@@ -58,9 +58,7 @@ public class ChooseComDialogFragment extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Dialog","Position" + position);
-                Intent intent = new Intent();
                 intent.putExtra("comCode",comCodeList.get(position));
-                getTargetFragment().onActivityResult(1, FLAGS.RETURN_COM_CODE,intent);
                 dismiss();
             }
         });
@@ -74,6 +72,8 @@ public class ChooseComDialogFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        getTargetFragment().onActivityResult(1, FLAGS.RETURN_COM_CODE,intent);
         Log.e("Dialog","Dialog关闭");
+
     }
 }
