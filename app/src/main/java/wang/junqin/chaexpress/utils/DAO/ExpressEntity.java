@@ -1,4 +1,6 @@
-package wang.junqin.chaexpress.DAO;
+package wang.junqin.chaexpress.utils.DAO;
+
+import java.io.Serializable;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
@@ -10,7 +12,7 @@ import io.objectbox.annotation.apihint.Internal;
  */
 
 @Entity
-public class ExpressEntity {
+public class ExpressEntity{
 
     @Id(assignable = true)
     private long id;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/item_exp_info_details_time"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="3dp"
+        android:padding="3dp"
+        android:textSize="12sp"
+        android:textColor="@color/GREY"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <View
+            android:id="@+id/up_line"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:background="@color/GREY"/>
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/item_exp_info_details_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_action_tick"
+            android:background="@color/GREEN"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:background="@color/GREY"/>
+    </LinearLayout>
+
+
+
+
+
+    <TextView
+        android:id="@+id/item_exp_info_details_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="3dp"
+        android:textSize="15sp"
+        android:textColor="@color/GREY"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical"/>
+
+</LinearLayout>

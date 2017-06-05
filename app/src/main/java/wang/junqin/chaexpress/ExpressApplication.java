@@ -3,10 +3,7 @@ package wang.junqin.chaexpress;
 import android.app.Application;
 import android.content.Context;
 
-import com.objectbox.gen.MyObjectBox;
-
-import io.objectbox.BoxStore;
-import wang.junqin.chaexpress.DAO.DAOUtils;
+import wang.junqin.chaexpress.utils.DAO.DAOUtils;
 import wang.junqin.chaexpress.data.ComCodeNameMap;
 import wang.junqin.chaexpress.utils.MyUtils;
 

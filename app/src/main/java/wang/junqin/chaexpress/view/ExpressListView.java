@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import wang.junqin.chaexpress.DAO.ExpressEntity;
-import wang.junqin.chaexpress.adapter.ExpressItemAdapter;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
+import wang.junqin.chaexpress.view.ui.adapter.ExpressItemAdapter;
 
 /**
  * Created by KN on 2017/5/30.

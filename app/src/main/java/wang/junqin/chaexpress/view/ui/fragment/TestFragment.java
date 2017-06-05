@@ -10,13 +10,11 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import io.objectbox.query.Query;
-import wang.junqin.chaexpress.DAO.DAOUtils;
-import wang.junqin.chaexpress.DAO.ExpressEntity;
+import wang.junqin.chaexpress.utils.DAO.DAOUtils;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.R;
 
 /**

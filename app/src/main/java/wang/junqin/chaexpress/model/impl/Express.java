@@ -1,17 +1,9 @@
 package wang.junqin.chaexpress.model.impl;
 
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import io.objectbox.Box;
@@ -19,13 +11,13 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import wang.junqin.chaexpress.DAO.DAOUtils;
-import wang.junqin.chaexpress.DAO.ExpressEntity;
+import wang.junqin.chaexpress.utils.DAO.DAOUtils;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.model.IExpress;
 import wang.junqin.chaexpress.model.bean.ExpressComBean;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
-import wang.junqin.chaexpress.net.NetWork;
-import wang.junqin.chaexpress.net.impl.NetWorkImpl;
+import wang.junqin.chaexpress.utils.net.NetWork;
+import wang.junqin.chaexpress.utils.net.impl.NetWorkImpl;
 import wang.junqin.chaexpress.presenter.QueryListener;
 
 /**
@@ -59,7 +51,12 @@ public class Express implements IExpress {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG,"onError");
-                        listener.onError(e.getCause().toString());
+
+                        if (e.getCause() == null) {
+                            listener.onError("未知错误");
+                        }else {
+                            listener.onError(e.getCause().toString());
+                        }
                     }
 
                     @Override
@@ -96,7 +93,7 @@ public class Express implements IExpress {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG,"onError");
-                        if (e == null) {
+                        if (e.getCause() == null) {
                             listener.onError("未知错误");
                         }else {
                             listener.onError(e.getCause().toString());

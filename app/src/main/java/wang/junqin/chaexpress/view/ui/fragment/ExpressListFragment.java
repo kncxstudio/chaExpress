@@ -1,7 +1,6 @@
 package wang.junqin.chaexpress.view.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,16 +14,17 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-import wang.junqin.chaexpress.DAO.DAOUtils;
-import wang.junqin.chaexpress.DAO.ExpressEntity;
+
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.R;
-import wang.junqin.chaexpress.adapter.ExpressItemAdapter;
-import wang.junqin.chaexpress.adapter.RecyclerViewItemClickListener;
+import wang.junqin.chaexpress.view.ui.adapter.ExpressItemAdapter;
+import wang.junqin.chaexpress.view.ui.adapter.RecyclerViewItemClickListener;
 import wang.junqin.chaexpress.data.ACTION_FLAGS;
 import wang.junqin.chaexpress.data.FLAGS;
 import wang.junqin.chaexpress.presenter.ExpressListPresenter;
 import wang.junqin.chaexpress.utils.MyUtils;
 import wang.junqin.chaexpress.view.ExpressListView;
+import wang.junqin.chaexpress.view.ui.activity.ExpInfoDetailsActivity;
 
 /**
  * Created by KN on 2017/6/2.
@@ -44,7 +44,7 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.viewpager_not_checked,container,false);
+        return inflater.inflate(R.layout.fragment_express_list,container,false);
     }
 
     @Override
@@ -58,6 +58,11 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.refreshList(PACKAGES_MODE);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -127,6 +132,9 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
                 @Override
                 public void onItemClick(View view) {
                     ExpressEntity entity = (ExpressEntity) view.getTag();
+                    Intent intent = new Intent(getContext(),ExpInfoDetailsActivity.class);
+                    intent.putExtra(FLAGS.EXP_NUM,entity.getExpNum());
+                    startActivity(intent);
                     Log.e(TAG,entity.getExpNum());
                 }
 

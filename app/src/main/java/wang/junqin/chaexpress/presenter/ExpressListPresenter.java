@@ -2,9 +2,8 @@ package wang.junqin.chaexpress.presenter;
 
 import android.util.Log;
 
-import wang.junqin.chaexpress.DAO.DAOUtils;
-import wang.junqin.chaexpress.DAO.ExpressEntity;
-import wang.junqin.chaexpress.DAO.model.ExpressEntityModel;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
+import wang.junqin.chaexpress.utils.DAO.model.ExpressEntityModel;
 import wang.junqin.chaexpress.view.ExpressListView;
 
 /**

@@ -1,4 +1,4 @@
-package wang.junqin.chaexpress.adapter;
+package wang.junqin.chaexpress.view.ui.adapter;
 
 import android.view.View;
 

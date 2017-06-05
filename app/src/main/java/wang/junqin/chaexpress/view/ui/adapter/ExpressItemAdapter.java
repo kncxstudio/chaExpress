@@ -1,24 +1,20 @@
-package wang.junqin.chaexpress.adapter;
+package wang.junqin.chaexpress.view.ui.adapter;
 
 import android.graphics.Color;
-import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-import wang.junqin.chaexpress.DAO.ExpressEntity;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.ExpressApplication;
 import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
@@ -29,8 +25,8 @@ import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
 
 public class ExpressItemAdapter extends RecyclerView.Adapter<ExpressItemAdapter.ExpressViewHolder> implements View.OnClickListener,View.OnLongClickListener{
 
-    RecyclerViewItemClickListener listener;
-    List<ExpressEntity> expressList;
+    private RecyclerViewItemClickListener listener;
+    private List<ExpressEntity> expressList;
     public ExpressItemAdapter(List<ExpressEntity> list){
         this.expressList = list;
     }
@@ -38,7 +34,7 @@ public class ExpressItemAdapter extends RecyclerView.Adapter<ExpressItemAdapter.
 
     @Override
     public ExpressViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(ExpressApplication.getContext()).inflate(R.layout.item_express_base,null);
+        View view = LayoutInflater.from(ExpressApplication.getContext()).inflate(R.layout.item_express_base,parent,false);
         return new ExpressViewHolder(view);
     }
 
@@ -61,10 +57,10 @@ public class ExpressItemAdapter extends RecyclerView.Adapter<ExpressItemAdapter.
 
         holder.refreshDate.setText(infos.get(0).getFtime());
 
-        holder.layout.setTag(expressList.get(position));
+        holder.cardView.setTag(expressList.get(position));
 
-        holder.layout.setOnClickListener(this);
-        holder.layout.setOnLongClickListener(this);
+        holder.cardView.setOnClickListener(this);
+        holder.cardView.setOnLongClickListener(this);
 
     }
 
@@ -89,14 +85,14 @@ public class ExpressItemAdapter extends RecyclerView.Adapter<ExpressItemAdapter.
     @Override
     public boolean onLongClick(View v) {
         listener.onItemLongClick(v);
-        return true;
+        return false;
     }
 
 
     class ExpressViewHolder extends RecyclerView.ViewHolder{
         ImageView img;
         TextView remark,refreshDate,latestInfo,status;
-        LinearLayout layout;
+        CardView cardView;
         public ExpressViewHolder(View itemView) {
             super(itemView);
             img = (ImageView) itemView.findViewById(R.id.img_item_com);
@@ -104,7 +100,7 @@ public class ExpressItemAdapter extends RecyclerView.Adapter<ExpressItemAdapter.
             refreshDate = (TextView) itemView.findViewById(R.id.tv_item_date);
             latestInfo = (TextView) itemView.findViewById(R.id.tv_item_latest);
             status = (TextView) itemView.findViewById(R.id.tv_item_status);
-            layout = (LinearLayout) itemView.findViewById(R.id.layout_item);
+            cardView = (CardView) itemView.findViewById(R.id.item_cardview);
         }
     }
 

@@ -44,9 +44,10 @@ public class ExpressQueryPresenter {
             public void onError(@Nullable String str) {
                 view.queryComplete();
 
-                if (str == null){
-                    view.showToast("未知错误");
-                }else {
+                assert str != null;
+                if (str.contains("No address associated with hostname")){
+                    view.showToast("连接服务器失败，请检查网络");
+                }else{
                     view.showToast(str);
                 }
 

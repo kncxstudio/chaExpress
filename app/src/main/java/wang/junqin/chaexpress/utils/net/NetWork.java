@@ -1,4 +1,4 @@
-package wang.junqin.chaexpress.net;
+package wang.junqin.chaexpress.utils.net;
 
 import java.util.List;
 

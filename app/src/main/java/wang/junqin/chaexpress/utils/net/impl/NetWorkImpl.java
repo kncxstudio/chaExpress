@@ -1,11 +1,11 @@
-package wang.junqin.chaexpress.net.impl;
+package wang.junqin.chaexpress.utils.net.impl;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import wang.junqin.chaexpress.model.bean.ExpressComBean;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
-import wang.junqin.chaexpress.net.NetWork;
+import wang.junqin.chaexpress.utils.net.NetWork;
 
 /**
  * Created by KN on 2017/5/29.

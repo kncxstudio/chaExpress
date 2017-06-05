@@ -1,4 +1,4 @@
-package wang.junqin.chaexpress.DAO;
+package wang.junqin.chaexpress.utils.DAO;
 
 import android.content.Context;
 

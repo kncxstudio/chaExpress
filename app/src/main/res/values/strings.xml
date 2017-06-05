@@ -5,4 +5,6 @@
     <string name="query">查询</string>
     <string name="not_checked">未签收</string>
     <string name="on_the_way">运输中</string>
+    <string name="edit_remark">编辑备注</string>
+    <string name="refresh">刷新</string>
 </resources>

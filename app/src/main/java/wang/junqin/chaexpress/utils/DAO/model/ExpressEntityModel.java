@@ -1,7 +1,5 @@
-package wang.junqin.chaexpress.DAO.model;
+package wang.junqin.chaexpress.utils.DAO.model;
 
-
-import android.util.Log;
 
 import com.objectbox.gen.ExpressEntity_;
 
@@ -9,12 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.objectbox.Box;
-import io.objectbox.annotation.Entity;
 import io.objectbox.query.Query;
-import io.objectbox.query.QueryBuilder;
-import wang.junqin.chaexpress.DAO.DAOUtils;
-import wang.junqin.chaexpress.DAO.ExpressEntity;
-import wang.junqin.chaexpress.model.impl.Express;
+import wang.junqin.chaexpress.utils.DAO.DAOUtils;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 
 /**
  * Created by KN on 2017/6/2.
@@ -58,6 +53,14 @@ public class ExpressEntityModel {
         return entityList;
     }
 
+    public ExpressEntity getEntityByExpNum(String expNum){
+        Query<ExpressEntity> query = expressEntityBox
+                .query()
+                .equal(ExpressEntity_.expNum,expNum)
+                .build();
+        ExpressEntity entity = query.find().get(0);
+        return entity;
+    }
 
     public void remove(ExpressEntity entity){
         expressEntityBox.remove(entity);

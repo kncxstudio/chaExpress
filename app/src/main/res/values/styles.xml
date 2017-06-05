@@ -5,9 +5,15 @@
         <!-- Customize your theme here. -->
 
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
+    <style name="ExpInfoDetailsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/TRANSPARTENT</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wang.junqin.chaexpress.R;
-import wang.junqin.chaexpress.adapter.ExpressPagerAdapter;
+import wang.junqin.chaexpress.view.ui.adapter.ExpressPagerAdapter;
 import wang.junqin.chaexpress.presenter.ExpressListPresenter;
 
 /**
