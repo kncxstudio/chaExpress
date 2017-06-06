@@ -26,6 +26,8 @@ public class  ComCodeNameMap{
         map.put("youzhengguoji","邮政包裹(国际)");
         map.put("kuaijiesudi","快捷速递");
         map.put("minghangkuaidi","民航快递");
+        map.put("huitongkuaidi","汇通快递");
+        map.put("baisisudi","百世速递");
     }
 
     public static String getComNameByCode(String comCode){

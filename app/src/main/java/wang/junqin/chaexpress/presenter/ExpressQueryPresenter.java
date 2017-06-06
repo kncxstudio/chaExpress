@@ -6,10 +6,13 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import io.objectbox.annotation.Entity;
 import wang.junqin.chaexpress.model.IExpress;
 import wang.junqin.chaexpress.model.bean.ExpressComBean;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
 import wang.junqin.chaexpress.model.impl.Express;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
+import wang.junqin.chaexpress.utils.DAO.model.ExpressEntityModel;
 import wang.junqin.chaexpress.utils.MyUtils;
 import wang.junqin.chaexpress.view.QueryExpressByNumView;
 
@@ -20,10 +23,12 @@ import wang.junqin.chaexpress.view.QueryExpressByNumView;
 public class ExpressQueryPresenter {
     QueryExpressByNumView view;
     IExpress express;
+    ExpressEntityModel model;
 
     public ExpressQueryPresenter(QueryExpressByNumView queryExpressByNumView){
         this.view = queryExpressByNumView;
         express = new Express();
+        model = new ExpressEntityModel();
     }
 
     public void queryExpCom(){
@@ -75,6 +80,11 @@ public class ExpressQueryPresenter {
                 view.queryComplete();
             }
         });
+    }
+
+
+    public void saveEntity(ExpressEntity entity){
+        model.put(entity);
     }
 
 }

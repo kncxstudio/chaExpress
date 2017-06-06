@@ -13,4 +13,5 @@ public interface ExpressInfoDetailsView {
     public String getExpNum();
     public void copyExpNumToClipboard();
     public int getNetworkStatus();
+    public void setNetworkStatus(int status);
 }

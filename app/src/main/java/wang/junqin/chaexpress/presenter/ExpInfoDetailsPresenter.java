@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import io.objectbox.annotation.Entity;
+import wang.junqin.chaexpress.data.FLAGS;
 import wang.junqin.chaexpress.model.IExpress;
 import wang.junqin.chaexpress.model.bean.ExpressComBean;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
@@ -42,16 +44,24 @@ public class ExpInfoDetailsPresenter {
                 entity.setExpInfo(new Gson().toJson(expressInfoBean.getData()));
                 entityModel.put(entity);
                 view.refreshExpInfo(entity);
+                view.setNetworkStatus(FLAGS.NETWORK_NOT_BUSY);
+                MyUtils.showToast("物流信息更新成功");
             }
 
             @Override
             public void onError(@Nullable String str) {
                 MyUtils.showToast(str);
+                view.setNetworkStatus(FLAGS.NETWORK_NOT_BUSY);
+
             }
         });
     }
 
     public ExpressEntity getEntityByExpNum(String expNum){
         return entityModel.getEntityByExpNum(expNum);
+    }
+
+    public void save(ExpressEntity entity){
+        entityModel.put(entity);
     }
 }

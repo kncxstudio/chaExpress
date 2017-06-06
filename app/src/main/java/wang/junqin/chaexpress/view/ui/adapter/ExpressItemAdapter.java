@@ -53,12 +53,14 @@ public class ExpressItemAdapter extends RecyclerView.Adapter<ExpressItemAdapter.
 
         List<ExpressInfoBean.Data> infos = new Gson().fromJson(entity.getExpInfo(),new TypeToken<List<ExpressInfoBean.Data>>(){}.getType());
 
-        holder.latestInfo.setText(infos.get(0).getContext());
 
-        holder.refreshDate.setText(infos.get(0).getFtime());
-
+        if (infos != null && infos.size() > 0) {
+            holder.latestInfo.setText(infos.get(0).getContext());
+            holder.refreshDate.setText(infos.get(0).getFtime());
+        }else {
+            holder.refreshDate.setText("暂无物流信息");
+        }
         holder.cardView.setTag(expressList.get(position));
-
         holder.cardView.setOnClickListener(this);
         holder.cardView.setOnLongClickListener(this);
 

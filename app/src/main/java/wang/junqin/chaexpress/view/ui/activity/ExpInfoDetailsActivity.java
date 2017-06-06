@@ -13,6 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -22,6 +27,7 @@ import java.util.List;
 
 import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.R;
+import wang.junqin.chaexpress.utils.MyUtils;
 import wang.junqin.chaexpress.view.ui.adapter.ExpressInfoDetailsAdapter;
 import wang.junqin.chaexpress.data.ComCodeNameMap;
 import wang.junqin.chaexpress.data.FLAGS;
@@ -57,6 +63,7 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
         entity = presenter.getEntityByExpNum(expNum);
         setContentView(R.layout.activity_express_info_details);
         init();
+        presenter.updateExpInfoFromNetwork(entity);
     }
 
 
@@ -67,14 +74,16 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_details_refresh:
+                if (NETWORK_STATUS == FLAGS.NETWORK_IS_BUSY) break;
                 presenter.updateExpInfoFromNetwork(entity);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void refreshExpInfo(ExpressEntity entity) {
@@ -87,16 +96,22 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
             }
         });
 
+        presenter.save(entity);
     }
 
     @Override
     public String getExpRemark() {
-        return null;
+        return expRemarkTV.getText().toString();
     }
 
     @Override
-    public void setExpRemark(String str) {
-
+    public void setExpRemark(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                expRemarkTV.setText(str);
+            }
+        });
     }
 
     @Override
@@ -112,6 +127,11 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
     @Override
     public int getNetworkStatus() {
         return NETWORK_STATUS;
+    }
+
+    @Override
+    public void setNetworkStatus(int status) {
+        NETWORK_STATUS = status;
     }
 
 

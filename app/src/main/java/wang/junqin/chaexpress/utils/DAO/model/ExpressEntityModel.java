@@ -1,6 +1,8 @@
 package wang.junqin.chaexpress.utils.DAO.model;
 
 
+import android.util.Log;
+
 import com.objectbox.gen.ExpressEntity_;
 
 import java.util.ArrayList;
@@ -8,8 +10,10 @@ import java.util.List;
 
 import io.objectbox.Box;
 import io.objectbox.query.Query;
+import wang.junqin.chaexpress.model.impl.Express;
 import wang.junqin.chaexpress.utils.DAO.DAOUtils;
 import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
+import wang.junqin.chaexpress.utils.MyUtils;
 
 /**
  * Created by KN on 2017/6/2.
@@ -67,6 +71,21 @@ public class ExpressEntityModel {
     }
 
     public void put(ExpressEntity entity){
-        expressEntityBox.put(entity);
+        Query<ExpressEntity> query = expressEntityBox
+                .query()
+                .equal(ExpressEntity_.expNum,entity.getExpNum())
+                .orderDesc(ExpressEntity_.dateAdded)
+                .build();
+        List<ExpressEntity> list = query.find();
+        if (list.size()>0){
+            ExpressEntity temp = list.get(0);
+            temp.setStatus(entity.getStatus());
+            temp.setExpInfo(entity.getExpInfo());
+            temp.setRemark(entity.getRemark());
+            expressEntityBox.put(temp);
+        }else {
+            expressEntityBox.put(entity);
+        }
     }
+
 }

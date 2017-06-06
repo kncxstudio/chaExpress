@@ -28,7 +28,7 @@ public class MyUtils {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(context,str,Toast.LENGTH_LONG).show();
+                Toast.makeText(context,str,Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.dd.CircularProgressButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,10 @@ import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.data.FLAGS;
 import wang.junqin.chaexpress.model.bean.ExpressComBean;
 import wang.junqin.chaexpress.presenter.ExpressQueryPresenter;
+import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.utils.MyUtils;
 import wang.junqin.chaexpress.view.QueryExpressByNumView;
+import wang.junqin.chaexpress.view.ui.activity.ExpInfoDetailsActivity;
 
 /**
  * Created by KN on 2017/5/29.
@@ -65,11 +69,21 @@ public class QueryFragment extends Fragment implements QueryExpressByNumView {
         switch (requestCode){
             case FLAGS.DIALOG_RETURN_CODE:
                 String comCode = data.getStringExtra("item");
-                if (comCode != null) {
-                    presenter.queryExpInfo(comCode);
-                }else {
-                    queryComplete();
-                }
+
+                ExpressEntity entity = new ExpressEntity(
+                        0
+                        ,getEditTextContent()
+                        ,comCode
+                        ,"[]"
+                        ,System.currentTimeMillis()
+                        ,"not_checked"
+                        ,null
+                );
+                presenter.saveEntity(entity);
+                queryComplete();
+                Intent intent = new Intent(getContext(),ExpInfoDetailsActivity.class);
+                intent.putExtra(FLAGS.EXP_NUM,getEditTextContent());
+                startActivity(intent);
                 break;
         }
     }
