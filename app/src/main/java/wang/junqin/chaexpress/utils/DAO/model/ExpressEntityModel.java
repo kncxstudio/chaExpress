@@ -118,9 +118,13 @@ public class ExpressEntityModel {
 
         if (list.size()>0){
             ExpressEntity temp = list.get(0);
-            temp.setRemark(entity.getRemark());
+
+            if (entity.getRemark() != null)
+                temp.setRemark(entity.getRemark());
+            if (entity.getStatus() != null)
+                temp.setStatus(entity.getStatus());
+
             temp.setExpInfo(entity.getExpInfo());
-            temp.setStatus(entity.getStatus());
 
             expressEntityBox.put(temp);
         }
