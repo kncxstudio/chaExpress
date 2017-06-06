@@ -50,10 +50,7 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        layout = (SwipeRefreshLayout) view.findViewById(R.id.viewpager_not_checked_swiperefreshlayout);
-        recyclerView = (RecyclerView) view.findViewById(R.id.viewpager_not_checked_recyclerview);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        presenter.refreshList(PACKAGES_MODE);
+        init(view);
 
     }
 
@@ -196,6 +193,31 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
         ExpressListFragment fragment = new ExpressListFragment();
         fragment.PACKAGES_MODE = mode;
         return fragment;
+    }
+
+
+    private void init(View view){
+        layout = (SwipeRefreshLayout) view.findViewById(R.id.viewpager_not_checked_swiperefreshlayout);
+        recyclerView = (RecyclerView) view.findViewById(R.id.viewpager_not_checked_recyclerview);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        presenter.refreshList(PACKAGES_MODE);
+
+
+        layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.e(TAG,"swipe refresh");
+                presenter.updateAllExpInfo();
+                MyUtils.showToast("物流信息更新完成");
+            }
+        });
+    }
+
+
+    @Override
+    public void finishRefresh(){
+        presenter.refreshList(PACKAGES_MODE);
+        layout.setRefreshing(false);
     }
 
 

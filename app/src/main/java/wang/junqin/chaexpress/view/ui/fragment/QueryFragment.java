@@ -69,21 +69,22 @@ public class QueryFragment extends Fragment implements QueryExpressByNumView {
         switch (requestCode){
             case FLAGS.DIALOG_RETURN_CODE:
                 String comCode = data.getStringExtra("item");
-
-                ExpressEntity entity = new ExpressEntity(
-                        0
-                        ,getEditTextContent()
-                        ,comCode
-                        ,"[]"
-                        ,System.currentTimeMillis()
-                        ,"not_checked"
-                        ,null
-                );
-                presenter.saveEntity(entity);
+                if (comCode != null) {
+                    ExpressEntity entity = new ExpressEntity(
+                            0
+                            , getEditTextContent()
+                            , comCode
+                            , "[]"
+                            , System.currentTimeMillis()
+                            , "not_checked"
+                            , null
+                    );
+                    presenter.saveEntity(entity);
+                    Intent intent = new Intent(getContext(), ExpInfoDetailsActivity.class);
+                    intent.putExtra(FLAGS.EXP_NUM, getEditTextContent());
+                    startActivity(intent);
+                }
                 queryComplete();
-                Intent intent = new Intent(getContext(),ExpInfoDetailsActivity.class);
-                intent.putExtra(FLAGS.EXP_NUM,getEditTextContent());
-                startActivity(intent);
                 break;
         }
     }

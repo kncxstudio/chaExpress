@@ -31,4 +31,6 @@ public interface ExpressListView {
     void showLongPressedActionChooseDialog(ArrayList<String> actionList);
     void showToast(String str);
 
+    void finishRefresh();
+
 }

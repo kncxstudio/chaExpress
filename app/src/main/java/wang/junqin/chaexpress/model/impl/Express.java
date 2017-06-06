@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import io.objectbox.Box;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -124,5 +125,11 @@ public class Express implements IExpress {
 
         expressEntityBox.put(entity);
 
+    }
+
+
+    @Override
+    public Observable<ExpressInfoBean> updateAllExpEntityFromNet(List<ExpressEntity> list){
+        return netWork.getExpressInfo(list);
     }
 }

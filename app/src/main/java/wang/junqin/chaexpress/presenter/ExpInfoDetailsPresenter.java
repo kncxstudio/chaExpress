@@ -62,6 +62,6 @@ public class ExpInfoDetailsPresenter {
     }
 
     public void save(ExpressEntity entity){
-        entityModel.put(entity);
+        entityModel.edit(entity);
     }
 }

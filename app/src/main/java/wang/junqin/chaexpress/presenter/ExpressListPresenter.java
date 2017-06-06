@@ -2,6 +2,8 @@ package wang.junqin.chaexpress.presenter;
 
 import android.util.Log;
 
+import java.util.List;
+
 import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.utils.DAO.model.ExpressEntityModel;
 import wang.junqin.chaexpress.view.ExpressListView;
@@ -12,7 +14,7 @@ import wang.junqin.chaexpress.view.ExpressListView;
 
 public class ExpressListPresenter {
     ExpressListView view;
-    ExpressEntityModel model = new ExpressEntityModel();
+    ExpressEntityModel model = new ExpressEntityModel(this);
 
     public final static int ALL_PACKAGES = 0;
     public final static int IS_CHECKED_PACKAGES = 1;
@@ -39,7 +41,7 @@ public class ExpressListPresenter {
 
     public void editExpressInfo(ExpressEntity entity){
         entity.setStatus("is_checked");
-        model.put(entity);
+        model.edit(entity);
         view.refreshList(model.getNotCheckedEntities());
         view.showToast("将包裹标记为已签收状态");
 
@@ -61,5 +63,16 @@ public class ExpressListPresenter {
                 break;
         }
     }
+
+
+    public void updateAllExpInfo(){
+        Log.e("presenter","updateAllExpInfo");
+        model.updateExpListFromNet(model.getAllEntities());
+    }
+
+    public void finishRefresh(){
+        view.finishRefresh();
+    }
+
 
 }

@@ -21,4 +21,5 @@ public interface IRequest {
             @Query("postid") String postId
             ,@Query("type") String com);
 
+
 }
