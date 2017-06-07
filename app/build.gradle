@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.0 Beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -52,10 +52,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
-    /**
-     * EventBus
-     */
-//    compile 'org.greenrobot:eventbus:3.0.0'
 
     /**
      * Gson
@@ -77,6 +73,12 @@ dependencies {
      * ObjectBox
      */
     compile 'io.objectbox:objectbox-android:0.9.12'
+
+    /**
+     * AlipayZeroSDK 支付宝转账工具
+     */
+    compile 'moe.feng:AlipayZeroSdk:1.1'
+
 
 }
 

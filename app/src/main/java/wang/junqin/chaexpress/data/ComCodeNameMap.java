@@ -11,13 +11,13 @@ public class  ComCodeNameMap{
     private static HashMap<String,String> map = new HashMap<>();
 
     public static void init(){
-        map.put("shunfeng","顺丰");
-        map.put("zhongtong","中通");
+        map.put("shunfeng","顺丰速递");
+        map.put("zhongtong","中通快递");
         map.put("ems","EMS");
-        map.put("yuantong","圆通");
-        map.put("yunda","韵达");
-        map.put("shentong","申通");
-        map.put("jd","京东");
+        map.put("yuantong","圆通速递");
+        map.put("yunda","韵达快递");
+        map.put("shentong","申通快递");
+        map.put("jd","京东物流");
         map.put("tiantian","天天快递");
         map.put("dhl","DHL中国件");
         map.put("dhlen","DHL国际件");
@@ -28,6 +28,7 @@ public class  ComCodeNameMap{
         map.put("minghangkuaidi","民航快递");
         map.put("huitongkuaidi","汇通快递");
         map.put("baisiwuliu","百世速递");
+        map.put("wanxiangwuliu","万象物流");
     }
 
     public static String getComNameByCode(String comCode){

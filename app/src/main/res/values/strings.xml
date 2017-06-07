@@ -7,4 +7,7 @@
     <string name="on_the_way">运输中</string>
     <string name="edit_remark">编辑备注</string>
     <string name="refresh">刷新</string>
+    <string name="change_remark">修改备注</string>
+    <string name="donation">打赏作者</string>
+    <string name="about">关于</string>
 </resources>

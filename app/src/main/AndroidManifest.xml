@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="wang.junqin.chaexpress">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ExpressApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
+        android:roundIcon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -21,9 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ui.activity.ExpInfoDetailsActivity"
-            android:theme="@style/ExpInfoDetailsTheme"
-            />
+        <activity
+            android:name=".view.ui.activity.ExpInfoDetailsActivity"
+            android:theme="@style/ExpInfoDetailsTheme" />
+        <activity
+            android:name=".view.ui.activity.EditDialogActivity"
+            android:label="修改备注"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+        <activity
+            android:name=".view.ui.activity.AboutActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:label="关于" />
     </application>
 
 </manifest>

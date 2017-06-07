@@ -3,12 +3,14 @@ package wang.junqin.chaexpress.view.ui.adapter;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -18,6 +20,7 @@ import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.ExpressApplication;
 import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
+import wang.junqin.chaexpress.utils.MyUtils;
 
 /**
  * Created by KN on 2017/6/2.
@@ -60,6 +63,8 @@ public class ExpressItemAdapter extends RecyclerView.Adapter<ExpressItemAdapter.
         }else {
             holder.refreshDate.setText("暂无物流信息");
         }
+        MyUtils.loadImage(entity.getExpCom()).into(holder.img);
+
         holder.cardView.setTag(expressList.get(position));
         holder.cardView.setOnClickListener(this);
         holder.cardView.setOnLongClickListener(this);

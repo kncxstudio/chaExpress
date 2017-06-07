@@ -1,10 +1,12 @@
 package wang.junqin.chaexpress.view.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +46,7 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
     private ExpressEntity entity;
     private Toolbar toolbar;
     private TextView expRemarkTV,expNumAndComTV;
+    private FloatingActionButton fab;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private AppBarLayout appBarLayout;
     private RecyclerView recyclerView;
@@ -66,6 +69,18 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
         presenter.updateExpInfoFromNetwork(entity);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (data != null){
+            switch (resultCode){
+                case FLAGS.EDIT_REMARK_SUCCESS:
+                    expRemarkTV.setText(data.getStringExtra(FLAGS.REMARK));
+                    break;
+            }
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,6 +98,7 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
     @Override
@@ -140,6 +156,7 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         expRemarkTV = (TextView) findViewById(R.id.activity_details_exp_remark);
         expNumAndComTV = (TextView) findViewById(R.id.activity_details_exp_num_and_com);
+        fab = (FloatingActionButton) findViewById(R.id.activity_details_fab);
 
         setSupportActionBar(toolbar);
         collapsingToolbarLayout.setTitle("物流详情");
@@ -147,6 +164,7 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#ffffff"));
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+
 
 
         //显示备注和订单号
@@ -168,6 +186,20 @@ public class ExpInfoDetailsActivity extends AppCompatActivity implements Express
         adapter = new ExpressInfoDetailsAdapter(expInfoList);
         Log.e("size",expInfoList.size()+"");
         recyclerView.setAdapter(adapter);
+
+
+        //初始化fab
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ExpInfoDetailsActivity.this,EditDialogActivity.class);
+                intent.putExtra(FLAGS.EXP_NUM,entity.getExpNum());
+                startActivityForResult(intent,FLAGS.EDIT_REMARK_ACTION);
+            }
+        });
     }
+
+
+
 
 }

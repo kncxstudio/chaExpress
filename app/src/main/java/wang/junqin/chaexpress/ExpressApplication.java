@@ -3,6 +3,7 @@ package wang.junqin.chaexpress;
 import android.app.Application;
 import android.content.Context;
 
+import wang.junqin.chaexpress.data.ComCodeIcoMap;
 import wang.junqin.chaexpress.utils.DAO.DAOUtils;
 import wang.junqin.chaexpress.data.ComCodeNameMap;
 import wang.junqin.chaexpress.utils.MyUtils;
@@ -20,6 +21,7 @@ public class ExpressApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
         ComCodeNameMap.init();
+        ComCodeIcoMap.init();
         MyUtils.initMyUtils(context);
         DAOUtils.init(context);
     }

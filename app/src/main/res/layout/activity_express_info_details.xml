@@ -83,6 +83,7 @@
         </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/activity_details_fab"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         app:layout_anchor="@id/appbar"

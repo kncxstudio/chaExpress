@@ -12,9 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import wang.junqin.chaexpress.data.ComCodeNameMap;
+import wang.junqin.chaexpress.model.bean.ExpressInfoBean;
 import wang.junqin.chaexpress.utils.DAO.ExpressEntity;
 import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.view.ui.adapter.ExpressItemAdapter;
@@ -74,7 +79,16 @@ public class ExpressListFragment extends Fragment implements ExpressListView {
                         presenter.editExpressInfo(selectedEntity);
                         break;
                     case ACTION_FLAGS.SHARE_TO_FRIENDS:
+                        String comName = ComCodeNameMap.getComNameByCode(selectedEntity.getExpCom());
+                        String expNum = selectedEntity.getExpNum();
+                        ExpressInfoBean.Data latestInfo = ((List<ExpressInfoBean.Data>)new Gson().fromJson(selectedEntity.getExpInfo(),new TypeToken<List<ExpressInfoBean.Data>>(){}.getType())).get(0);
+                        String info = "暂无物流信息";
+                        if (latestInfo != null)info = latestInfo.getTime() + "   " +latestInfo.getContext();
 
+                        Intent intent = MyUtils.shareInfoToFriends(
+                                comName +"   "+ expNum + "   " + info + "   【分享来自查快递】"
+                        );
+                        startActivity(intent);
                         break;
                 }
             }

@@ -12,4 +12,5 @@
     <color name="GREY_DARK">#585858</color>
     <color name="TRANSPARTENT">#00000000</color>
     <color name="GREEN">#70e78a</color>
+    <color name="LINK_BLUE">#0d36ae</color>
 </resources>

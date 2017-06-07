@@ -7,15 +7,51 @@
     android:gravity="center_vertical|center_horizontal"
     android:padding="25dp">
 
-    <EditText
-        android:id="@+id/express_num_ET"
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/logo_no_text" />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <com.dd.CircularProgressButton
-        android:id="@+id/query_submit_Btn"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/cpb_white"
-        app:cpb_textIdle="@string/query" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp">
 
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入要查询的快递号">
+            <EditText
+                android:id="@+id/express_num_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/query_submit_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cpb_white"
+            app:cpb_textIdle="@string/query"
+            android:imeOptions="actionDone"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tips:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认单号正确的情况下，提醒单号不存在或者过期可能原因是还未揽件"/>
+
+    </LinearLayout>
 </LinearLayout>

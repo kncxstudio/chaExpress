@@ -32,9 +32,6 @@ public class ExpressInfoDetailsAdapter  extends RecyclerView.Adapter<ExpressInfo
 
     @Override
     public void onBindViewHolder(ExpInfoDatailsViewHolder holder, int position) {
-        if (0 == position){
-            //Glide...
-        }
         holder.date.setText(list.get(position).getTime());
         holder.info.setText(list.get(position).getContext());
     }
