@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import moe.feng.alipay.zerosdk.AlipayZeroSdk;
 import wang.junqin.chaexpress.R;
 import wang.junqin.chaexpress.data.FLAGS;
+import wang.junqin.chaexpress.utils.MyUtils;
 import wang.junqin.chaexpress.view.ui.fragment.MyPackagesFragment;
 import wang.junqin.chaexpress.view.ui.fragment.QueryFragment;
 
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_donation:
                 if (AlipayZeroSdk.hasInstalledAlipayClient(this)){
                     AlipayZeroSdk.startAlipayClient(this, FLAGS.ALIPAY_QR_CODE_STR);
+                }else {
+                    MyUtils.showToast("未安装支付宝客户端");
                 }
                 break;
             case R.id.menu_about:
